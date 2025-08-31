@@ -2,20 +2,29 @@ package main
 
 import (
 	"Projects/StormGo/geo"
+	"Projects/StormGo/weather"
 	"flag"
 	"fmt"
 )
 
 func main() {
 	city := flag.String("city", "", "User city")
-	// format := flag.Int("format", 1, "Format for output")
+	format := flag.Int("format", 1, "Format for output")
 	flag.Parse()
 	geoData, err := geo.GetMyLocation(city)
 	if err != nil {
 		fmt.Println(err.Error())
 	}
-	fmt.Println(*geoData)
+	weatherData, err := weather.GetWeather(geoData, *format)
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+	if *format == 3 || *format == 4 {
+		fmt.Print( weatherData)
+		return
+	}
+	fmt.Print(geoData.City, ": ", weatherData)
 }
 
-// go run . --city=""
-// next 15.6
+// go run . --city="" --format=4
+// next 15.7
