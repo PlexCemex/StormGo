@@ -22,7 +22,7 @@ func GetWeather(geo *geo.GeoData, format int) (string, error) {
 		return "", err
 	}
 	if wttr.StatusCode != 200 {
-		return "", errors.New("status code fron wttr.in is not 200")
+		return "", errors.New("status code from wttr.in is not 200")
 	}
 	body, err := io.ReadAll(wttr.Body)
 	if err != nil {

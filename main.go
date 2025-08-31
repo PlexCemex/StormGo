@@ -14,6 +14,7 @@ func main() {
 	geoData, err := geo.GetMyLocation(city)
 	if err != nil {
 		fmt.Println(err.Error())
+		return
 	}
 	weatherData, err := weather.GetWeather(geoData, *format)
 	if err != nil {
@@ -26,5 +27,5 @@ func main() {
 	fmt.Print(geoData.City, ": ", weatherData)
 }
 
-// go run . --city="" --format=4
-// next 15.7
+// Example: go run . --city="" --format=4
+// next 16.1
