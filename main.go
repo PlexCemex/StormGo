@@ -5,9 +5,6 @@ import (
 	"flag"
 	"fmt"
 )
-type boob interface{
-
-}
 
 func main() {
 	city := flag.String("city", "", "User city")
