@@ -1,17 +1,24 @@
 package main
 
 import (
+	"Projects/StormGo/geo"
 	"flag"
 	"fmt"
 )
+type boob interface{
+
+}
 
 func main() {
 	city := flag.String("city", "", "User city")
-	format := flag.Int("format", 1, "Format for output")
-
+	// format := flag.Int("format", 1, "Format for output")
 	flag.Parse()
-
-	fmt.Println(*city, *format)
+	geoData, err := geo.GetMyLocation(city)
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+	fmt.Println(*geoData)
 }
 
 // go run . --city=""
+// next 15.6
