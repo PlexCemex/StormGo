@@ -16,10 +16,12 @@ type cityPopulationResponce struct {
 	Error bool `json:"error"`
 }
 
+var ErrNoCity = errors.New("entered city does not exist")
+var ErrNot200 = errors.New("status code from apapi.co is not 200")
 func GetMyLocation(city *string) (*GeoData, error) {
 	if *city != "" {
 		if ! chekcCity(*city) {
-			return nil, errors.New("entered city does not exist")
+			return nil, ErrNoCity
 		}
 		return &GeoData{City: *city}, nil
 	}
@@ -28,7 +30,7 @@ func GetMyLocation(city *string) (*GeoData, error) {
 		return nil, err
 	}
 	if apapi.StatusCode != 200 {
-		return nil, errors.New("status code from apapi.co is not 200")
+		return nil, ErrNot200
 	}
 	body, err := io.ReadAll(apapi.Body)
 	if err != nil {
