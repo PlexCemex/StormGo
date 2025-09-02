@@ -18,7 +18,7 @@ func TestGetMyLocation(t *testing.T) {
 	if err != nil {
 		t.Errorf("Получина ошибка тестирования при передаче города: %v", err)
 	}
-	if got.City != expected.City {
+	if *got != expected {
 		t.Errorf("Ожидалось %v, получино %v", expected, got)
 	}
 }
